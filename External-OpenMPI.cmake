@@ -11,4 +11,5 @@ ExternalProject_Add(
         # URL_MD5 f4096c4583947b0eb103c8539f1623a3 TODO
         CONFIGURE_COMMAND ./configure --prefix=${INSTALL_ROOT}/openmpi
         BUILD_IN_SOURCE 0
+        BUILD_ALWAYS OFF
 )

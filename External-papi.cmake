@@ -7,6 +7,7 @@ ExternalProject_Add(
         # URL_MD5 f4096c4583947b0eb103c8539f1623a3 TODO
         CONFIGURE_COMMAND cd src; configure --prefix=${INSTALL_ROOT}/papi --enable-shared ; cd -
         BUILD_IN_SOURCE 1
+        BUILD_ALWAYS OFF
         BUILD_COMMAND cd src; make -j ${PARALLEL_BUILD}; cd -
         INSTALL_COMMAND cd src; make install; cd -
 )

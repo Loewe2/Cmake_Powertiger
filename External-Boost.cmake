@@ -12,8 +12,18 @@ ExternalProject_Add(
         # URL_MD5 f4096c4583947b0eb103c8539f1623a3
         INSTALL_DIR ${INSTALL_ROOT}/boost
         BUILD_IN_SOURCE 1
+        BUILD_ALWAYS OFF
         CONFIGURE_COMMAND ./bootstrap.sh --prefix=<INSTALL_DIR> --with-toolset=gcc
-        BUILD_COMMAND ./b2 -j${PARALLEL_BUILD} "${flag1}" ${flag2} --with-atomic --with-filesystem --with-program_options --with-regex --with-system --with-chrono --with-date_time --with-thread ${BOOST_BUILD_TYPE} 
+        BUILD_COMMAND ./b2 
+            -j${PARALLEL_BUILD} "${flag1}" ${flag2} 
+            --with-atomic 
+            --with-filesystem 
+            --with-program_options 
+            --with-regex 
+            --with-system 
+            --with-chrono 
+            --with-date_time 
+            --with-thread ${BOOST_BUILD_TYPE} 
         INSTALL_COMMAND ./b2 -j${PARALLEL_BUILD} install
 )
 

@@ -6,6 +6,7 @@ ExternalProject_Add(
         PREFIX ${CMAKE_CURRENT_BINARY_DIR}/external/cmake
         URL https://github.com/Kitware/CMake/releases/download/v${CMAKE_TARGET_VERSION}/cmake-${CMAKE_TARGET_VERSION}.tar.gz
         BUILD_IN_SOURCE 1
+        BUILD_ALWAYS OFF
         CONFIGURE_COMMAND ./bootstrap --parallel=${PARALLEL_BUILD} --prefix=${CMAKE_CURRENT_BINARY_DIR}/build/cmake -- -DCMAKE_BUILD_TYPE=Release
 )
 

@@ -10,8 +10,14 @@ ExternalProject_Add(
         GIT_REPOSITORY https://github.com/live-clones/hdf5
         GIT_TAG hdf5-${HDF5_TARGET_VERSION_UNDERSCORE}
         INSTALL_DIR ${CMAKE_CURRENT_BINARY_DIR}/build/hdf5
-        CMAKE_ARGS  -Wno-dev -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR> -DBUILD_TESTING=OFF -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS=-fPIC
+        CMAKE_ARGS  
+            -Wno-dev 
+            -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR> 
+            -DBUILD_TESTING=OFF 
+            -DCMAKE_BUILD_TYPE=Release 
+            -DCMAKE_CXX_FLAGS=-fPIC
         BUILD_IN_SOURCE 0
+        BUILD_ALWAYS OFF
 )
 
 set($ENV{HDF5_ROOT} ${CMAKE_CURRENT_BINARY_DIR}/build/hdf5/)

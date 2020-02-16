@@ -6,6 +6,7 @@ if(${BUILD_GCC} MATCHES "ON")
             INSTALL_DIR ${CMAKE_CURRENT_BINARY_DIR}/build/gcc-${GCC_TARGET_VERSION}
             URL ftp://ftp.fu-berlin.de/unix/languages/gcc/releases/gcc-${GCC_TARGET_VERSION}/gcc-${GCC_TARGET_VERSION}.tar.xz
             BUILD_IN_SOURCE 0
+            BUILD_ALWAYS OFF
             PATCH_COMMAND ./contrib/download_prerequisites
             CONFIGURE_COMMAND <SOURCE_DIR>/configure --prefix=<INSTALL_DIR> --enable-languages=c,c++,fortran --disable-multilib --disable-nls
     )
@@ -22,6 +23,7 @@ if(${BUILD_GCC_CUDA} MATCHES "ON" )
             INSTALL_DIR ${CMAKE_CURRENT_BINARY_DIR}/build/gcc-${GCC_CUDA_TARGET_VERSION}
             URL ftp://ftp.fu-berlin.de/unix/languages/gcc/releases/gcc-${GCC_CUDA_TARGET_VERSION}/gcc-${GCC_CUDA_TARGET_VERSION}.tar.xz
             BUILD_IN_SOURCE 0
+            BUILD_ALWAYS OFF
             PATCH_COMMAND ./contrib/download_prerequisites
             CONFIGURE_COMMAND <SOURCE_DIR>/configure --prefix=<INSTALL_DIR> --enable-languages=c,c++,fortran --disable-multilib --disable-nls
     )

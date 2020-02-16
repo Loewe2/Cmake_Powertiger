@@ -8,4 +8,5 @@ ExternalProject_Add(
         PATCH_COMMAND ./autogen.sh
         CONFIGURE_COMMAND ./configure --prefix=${INSTALL_ROOT}/jemalloc
         BUILD_IN_SOURCE 1
+        BUILD_ALWAYS OFF
 )

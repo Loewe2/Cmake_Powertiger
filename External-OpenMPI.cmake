@@ -1,0 +1,14 @@
+message( STATUS "Building OpenMPI version: " ${OPENMPI_TARGET_VERSION} )
+
+string(REPLACE "." ";" OPENMPI_TARGET_VERSION_LIST ${OPENMPI_TARGET_VERSION})
+list(SUBLIST OPENMPI_TARGET_VERSION_LIST 0 2 OPENMPI_TARGET_VERSION_LIST)
+list(JOIN OPENMPI_TARGET_VERSION_LIST "." OPENMPI_TARGET_VERSION_SHORT)
+
+ExternalProject_Add(
+    OpenMPI
+        PREFIX ${CMAKE_CURRENT_BINARY_DIR}/external/openmpi
+        URL https://download.open-mpi.org/release/open-mpi/v${OPENMPI_TARGET_VERSION_SHORT}/openmpi-${OPENMPI_TARGET_VERSION}.tar.gz
+        # URL_MD5 f4096c4583947b0eb103c8539f1623a3 TODO
+        CONFIGURE_COMMAND ./configure --prefix=${INSTALL_ROOT}/openmpi
+        BUILD_IN_SOURCE 0
+)

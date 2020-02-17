@@ -37,6 +37,13 @@ elseif(${BUILD_MINIMAL_DEPENDENCIES} MATCHES "ON")
     find_package(CUDA ${CUDA_TARGET_VERSION} REQUIRED)
     message(STATUS "Found CUDA ${CUDA_VERSION_STRING} at ${CUDA_TOOLKIT_ROOT_DIR}")
 
+    #
+    if(${DETERMINE_CUDA_SM} MATCHES "ON")
+      execute_process(COMMAND nvcc --run /import/sgs.scratch/vancraar/octo/cmake_test/superbuild/get_cuda_sm.cu RESULT_VARIABLE sm)
+      execute_process(COMMAND rm -f a.out)
+      set(CUDA_SM "sm_${sm}")
+    endif()
+
     #check max supportted gcc version from CUDA #TODO nicer
     if(${CUDA_VERSION} VERSION_LESS 5)
       set(CUDA_MAX_GCC 4.5)

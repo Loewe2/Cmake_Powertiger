@@ -92,7 +92,7 @@ elseif(${BUILD_MINIMAL_DEPENDENCIES} MATCHES "ON")
   endif()
 
   # boost
-  find_package(Boost ${BOOST_TARGET_VERSION} COMPONENTS system)
+  find_package(Boost ${BOOST_TARGET_VERSION} COMPONENTS system context thread chrono)
   if(${Boost_FOUND})
     message(STATUS "Using sysem Boost ${Boost_VERSION}")
     set(BOOST_ROOT ${Boost_ROOT})

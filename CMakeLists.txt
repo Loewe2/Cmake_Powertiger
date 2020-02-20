@@ -101,6 +101,8 @@ elseif(${BUILD_MINIMAL_DEPENDENCIES} MATCHES "ON")
       BOOST_ROOT "${Boost_DIR}/../../../" ABSOLUTE
       )
    endif()
+   else()
+    set(BUILD_BOOST ON)
    endif()
 
   # HDF5 #TODO: HDF5 got found but missing lib dir

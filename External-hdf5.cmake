@@ -9,6 +9,7 @@ ExternalProject_Add(
         PREFIX ${CMAKE_CURRENT_BINARY_DIR}/external/hdf5
         GIT_REPOSITORY https://github.com/live-clones/hdf5
         GIT_TAG hdf5-${HDF5_TARGET_VERSION_UNDERSCORE}
+        GIT_PROGRESS FALSE
         INSTALL_DIR ${CMAKE_CURRENT_BINARY_DIR}/build/hdf5
         CMAKE_ARGS  
             -Wno-dev 

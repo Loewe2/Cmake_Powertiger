@@ -4,6 +4,7 @@ ExternalProject_Add(
     libfabric
         PREFIX ${CMAKE_CURRENT_BINARY_DIR}/external/libfabric
         URL https://github.com/ofiwg/libfabric/archive/v${LIBFABRIC_TARGET_VERSION}.tar.gz
+        DOWNLOAD_NO_PROGRESS TRUE
         # URL_MD5 f4096c4583947b0eb103c8539f1623a3 TODO
         PATCH_COMMAND ./autogen.sh
         CONFIGURE_COMMAND ./configure 

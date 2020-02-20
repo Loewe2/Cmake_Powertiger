@@ -5,6 +5,7 @@ if(${BUILD_GCC} MATCHES "ON")
             PREFIX ${CMAKE_CURRENT_BINARY_DIR}/external/gcc-${GCC_TARGET_VERSION}
             INSTALL_DIR ${CMAKE_CURRENT_BINARY_DIR}/build/gcc-${GCC_TARGET_VERSION}
             URL ftp://ftp.fu-berlin.de/unix/languages/gcc/releases/gcc-${GCC_TARGET_VERSION}/gcc-${GCC_TARGET_VERSION}.tar.xz
+            DOWNLOAD_NO_PROGRESS TRUE
             BUILD_IN_SOURCE 0
             BUILD_ALWAYS OFF
             PATCH_COMMAND ./contrib/download_prerequisites
@@ -22,6 +23,7 @@ if(${BUILD_GCC_CUDA} MATCHES "ON" )
             PREFIX ${CMAKE_CURRENT_BINARY_DIR}/external/gcc-${GCC_CUDA_TARGET_VERSION}
             INSTALL_DIR ${CMAKE_CURRENT_BINARY_DIR}/build/gcc-${GCC_CUDA_TARGET_VERSION}
             URL ftp://ftp.fu-berlin.de/unix/languages/gcc/releases/gcc-${GCC_CUDA_TARGET_VERSION}/gcc-${GCC_CUDA_TARGET_VERSION}.tar.xz
+            DOWNLOAD_NO_PROGRESS TRUE
             BUILD_IN_SOURCE 0
             BUILD_ALWAYS OFF
             PATCH_COMMAND ./contrib/download_prerequisites

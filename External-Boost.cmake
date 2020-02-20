@@ -10,6 +10,7 @@ ExternalProject_Add(
         PREFIX ${CMAKE_CURRENT_BINARY_DIR}/external/boost
         URL http://downloads.sourceforge.net/project/boost/boost/${BOOST_TARGET_VERSION}/boost_${Boost_TARGET_Version_Underscore}.tar.bz2
         # URL_MD5 f4096c4583947b0eb103c8539f1623a3
+        DOWNLOAD_NO_PROGRESS TRUE
         INSTALL_DIR ${INSTALL_ROOT}/boost
         BUILD_IN_SOURCE 1
         BUILD_ALWAYS OFF

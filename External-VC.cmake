@@ -5,6 +5,7 @@ ExternalProject_Add(
         PREFIX ${CMAKE_CURRENT_BINARY_DIR}/external/Vc
         GIT_REPOSITORY https://github.com/VcDevel/Vc.git
         GIT_TAG ${VC_TARGET_VERSION}
+        GIT_PROGRESS FALSE
         INSTALL_DIR ${CMAKE_CURRENT_BINARY_DIR}/build/Vc 
         CMAKE_ARGS 
             -Wno-dev 

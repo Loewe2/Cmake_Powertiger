@@ -5,6 +5,7 @@ ExternalProject_Add(
     
     PREFIX ${CMAKE_CURRENT_BINARY_DIR}/build/octotiger
     GIT_REPOSITORY https://github.com/STEllAR-GROUP/octotiger.git
+    GIT_PROGRESS FALSE
     # CMAKE_COMMAND ${CMAKE_CURRENT_BINARY_DIR}/build/cmake/bin/cmake
     INSTALL_DIR ${CMAKE_CURRENT_BINARY_DIR}/octotiger/build
     CMAKE_ARGS 

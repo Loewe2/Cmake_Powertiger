@@ -92,12 +92,16 @@ elseif(${BUILD_MINIMAL_DEPENDENCIES} MATCHES "ON")
   endif()
 
   # boost
-  find_package(Boost ${BOOST_TARGET_VERSION})
+  find_package(Boost ${BOOST_TARGET_VERSION} COMPONENTS system)
   if(${Boost_FOUND})
     message(STATUS "Using sysem Boost ${Boost_VERSION}")
-  else()
-    set(BUILD_BOOST ON)
-  endif()
+    set(BOOST_ROOT ${Boost_ROOT})
+    if(DEFINED Boost_DIR)
+      get_filename_component(
+      BOOST_ROOT "${Boost_DIR}/../../../" ABSOLUTE
+      )
+   endif()
+   endif()
 
   # HDF5 #TODO: HDF5 got found but missing lib dir
   # set(HDF5_USE_STATIC_LIBRARIES ON)
@@ -138,7 +142,7 @@ endif()
 
 
 
-set(CXXFLAGS "-fPIC -mcpu=native -mtune=native -ffast-math -std=c++17")
+set(CXXFLAGS "-fPIC -march=native -mtune=native -ffast-math -std=c++17")
 set(LIBHPX lib64)
 
 ########### build dependencies ##################
@@ -159,6 +163,8 @@ include(ExternalProject)
 # if( ${BUILD_OPENMPI} MATCHES "ON" )
   # include( External-OpenMPI.cmake )
 # endif()
+
+
 
 if( ${BUILD_BOOST} MATCHES "ON" )
   include( External-Boost.cmake )

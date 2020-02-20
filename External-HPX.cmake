@@ -7,7 +7,7 @@ ExternalProject_Add(
         PREFIX ${CMAKE_CURRENT_BINARY_DIR}/external/hpx
         GIT_REPOSITORY https://github.com/STEllAR-GROUP/hpx.git
         GIT_TAG ${HPX_TARGET_VERSION}
-        CMAKE_COMMAND ${CMAKE_COMMAND}
+        GIT_PROGRESS FALSE
         INSTALL_DIR ${CMAKE_CURRENT_BINARY_DIR}/build/hpx
         CMAKE_ARGS  
             -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR> 
@@ -27,7 +27,9 @@ ExternalProject_Add(
             -DHWLOC_ROOT=${INSTALL_ROOT}/hwloc/ 
             -DHPX_WITH_MALLOC=JEMALLOC 
             -DJEMALLOC_ROOT=${INSTALL_ROOT}/jemalloc/  
-            -DLIBFABRIC_ROOT=$INSTALL_ROOT/libfabric 
+            -DLIBFABRIC_ROOT=${INSTALL_ROOT}/libfabric 
+            -DBoost_NO_SYSTEM_PATHS=ON
+            -DBOOST_ROOT=${BOOST_ROOT}
             -DHPX_WITH_CUDA_ARCH=${CUDA_SM} 
             -DHPX_WITH_NETWORKING=ON 
             -DHPX_WITH_MORE_THAN_64_THREADS=ON 

@@ -17,6 +17,7 @@ ExternalProject_Add(
             -DBUILD_TESTING=OFF 
             -DCMAKE_BUILD_TYPE=Release 
             -DCMAKE_CXX_FLAGS=-fPIC
+            -DCMAKE_C_FLAGS=-fPIC
         BUILD_IN_SOURCE 0
         BUILD_ALWAYS OFF
 )

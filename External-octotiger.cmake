@@ -20,11 +20,12 @@ ExternalProject_Add(
         -DVc_DIR=${INSTALL_ROOT}/Vc/lib/cmake/Vc 
         -DOCTOTIGER_WITH_BLAST_TEST=OFF 
         -DHDF5_INCLUDE_DIR=${INSTALL_ROOT}/hdf5/include 
-        -DHDF5_LIBRARY=${INSTALL_ROOT}/hdf5/lib/libhdf5.a 
+        -DHDF5_LIBRARY=${INSTALL_ROOT}/hdf5/lib/libhdf5.a
+        -DHDF5_ROOT=${INSTALL_ROOT}/hdf5/
         -DCMAKE_CXX_FLAGS=${CXXFLAGS}\ -fpermissive 
         -DCMAKE_EXE_LINKER_FLAGS=${LDCXXFLAGS}\ -lz\ -L${INSTALL_ROOT}/hdf5/lib\ -lhdf5 
         -DOCTOTIGER_WITH_CUDA=${OCT_WITH_CUDA} 
     BUILD_IN_SOURCE 0
     # BUILD_ALWAYS ON
-    DEPENDS ${OCTOTIGER_DEPENDENCIES}
+    # DEPENDS ${OCTOTIGER_DEPENDENCIES}
 )

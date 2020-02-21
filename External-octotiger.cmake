@@ -3,7 +3,7 @@ set(LDFLAGS "-lz -L${INSTALL_ROOT}/hdf5/lib -lhdf5 -no-pie" CACHE STRING "LDFLAG
 ExternalProject_Add(
     Octotiger
     
-    PREFIX ${CMAKE_CURRENT_BINARY_DIR}/build/octotiger
+    PREFIX ${CMAKE_CURRENT_BINARY_DIR}/octotiger
     GIT_REPOSITORY https://github.com/STEllAR-GROUP/octotiger.git
     GIT_PROGRESS FALSE
     # CMAKE_COMMAND ${CMAKE_CURRENT_BINARY_DIR}/build/cmake/bin/cmake
@@ -11,6 +11,8 @@ ExternalProject_Add(
     CMAKE_ARGS 
         -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR> 
         -DCMAKE_PREFIX_PATH=<PEFIX> 
+        -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}
+        -DCMAKE_C_COMPILER=${CMAKE_C_COMPILER} 
         -DHPX_DIR=${CMAKE_CURRENT_BINARY_DIR}/build/hpx/lib/cmake/HPX/  
         -DSilo_INCLUDE_DIR=${CMAKE_CURRENT_BINARY_DIR}/build/silo/include 
         -DSilo_LIBRARY=${CMAKE_CURRENT_BINARY_DIR}/build/silo/lib/libsiloh5.a 

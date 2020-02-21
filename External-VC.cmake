@@ -9,7 +9,9 @@ ExternalProject_Add(
         INSTALL_DIR ${CMAKE_CURRENT_BINARY_DIR}/build/Vc 
         CMAKE_ARGS 
             -Wno-dev 
-            -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR> 
+            -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR>
+            -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}
+            -DCMAKE_C_COMPILER=${CMAKE_C_COMPILER} 
             -DCMAKE_BUILD_TYPE=Release 
             -DBUILD_TESTING=OFF 
         BUILD_IN_SOURCE 0

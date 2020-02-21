@@ -13,7 +13,9 @@ ExternalProject_Add(
         INSTALL_DIR ${CMAKE_CURRENT_BINARY_DIR}/build/hdf5
         CMAKE_ARGS  
             -Wno-dev 
-            -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR> 
+            -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR>
+            -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}
+            -DCMAKE_C_COMPILER=${CMAKE_C_COMPILER} 
             -DBUILD_TESTING=OFF 
             -DCMAKE_BUILD_TYPE=Release 
             -DCMAKE_CXX_FLAGS=-fPIC

@@ -19,18 +19,18 @@ endif()
 
 ######## select all dependencies to build ###########
 if(${BUILD_ALL_DEPENDENCIES} MATCHES "ON")
-  set(BUILD_CMAKE ON)
-  set(BUILD_GCC ON)
-  set(BUILD_OPENMPI ON)
-  set(BUILD_HDF5 ON)
-  set(BUILD_SILO ON)
-  set(BUILD_HWLOC ON)
-  set(BUILD_JEMALLOC ON)
-  set(BUILD_TCMALLOC ON)
-  set(BUILD_VC ON)
-  set(BUILD_PAPI ON)
-  set(BUILD_LIBFABRIC ON)
-  set(BUILD_HPX ON)
+  set(BUILD_CMAKE ON CACHE BOOL "build CMAKE ${CMAKE_VERSION}"  FORCE )
+  set(BUILD_GCC ON CACHE BOOL "build GCC ${GCC_VERSION}" FORCE)
+  set(BUILD_OPENMPI ON CACHE BOOL "build OpenMPI ${OPENMPI_VERSION}" FORCE)
+  set(BUILD_HDF5 ON CACHE BOOL "build HDF5 ${HDF5_VERSION}" FORCE)
+  set(BUILD_SILO ON CACHE BOOL "build Silo ${SILO_VERSION}" FORCE)
+  set(BUILD_HWLOC ON CACHE BOOL "build Hwloc ${HWLOC_VERSION}" FORCE)
+  set(BUILD_JEMALLOC ON CACHE BOOL "build jemalloc ${JEMALLOC_VERSION}" FORCE)
+  set(BUILD_VC ON CACHE BOOL "build Vc ${VC_VERSION}" FORCE)
+  set(BUILD_PAPI ON CACHE BOOL "build PAPI ${PAPI_VERSION}" FORCE)
+  set(BUILD_LIBFABRIC ON CACHE BOOL "build libfabric ${LIBFABRIC_VERSION} " FORCE)
+  set(BUILD_HPX ON CACHE BOOL "build HPX ${HPX_VERSION}" FORCE)
+  set(BUILD_BOOST ON CACHE BOOL "build Boost ${BOOST_VERSION}" FORCE)
 
 ########## decide what to build if minimal build #######
 elseif(${BUILD_MINIMAL_DEPENDENCIES} MATCHES "ON")
@@ -38,7 +38,7 @@ elseif(${BUILD_MINIMAL_DEPENDENCIES} MATCHES "ON")
   if(CMAKE_COMPILER_IS_GNUCC AND CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL ${GCC_TARGET_VERSION})
     message(STATUS "Using system GCC ${CMAKE_CXX_COMPILER_VERSION}")
   else()
-    set(BUILD_GCC ON)
+    set(BUILD_GCC ON CACHE BOOL "build GCC ${GCC_VERSION}" FORCE)
   endif()
 
   if(${OCT_WITH_CUDA} MATCHES ON)
@@ -79,15 +79,15 @@ elseif(${BUILD_MINIMAL_DEPENDENCIES} MATCHES "ON")
     #gcc for cuda # TODO check first if CMAKE_CUDA_HOST_COMPILER is given
     if(CMAKE_COMPILER_IS_GNUCC AND CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL ${GCC_CUDA_TARGET_VERSION} AND  CMAKE_CXX_COMPILER_VERSION VERSION_LESS_EQUAL ${CUDA_MAX_GCC} )
       message(STATUS "CUDA: Using system GCC ${CMAKE_CXX_COMPILER_VERSION}")
-      set(CMAKE_CUDA_HOST_COMPILER  ${CMAKE_CXX_COMPILER} CACHE PATH "" FORCE )
+      set(CMAKE_CUDA_HOST_COMPILER  ${CMAKE_CXX_COMPILER} CACHE FILEPATH "cuda host compiler" FORCE )
     else()
-      set(BUILD_GCC_CUDA ON)
+      set(BUILD_GCC_CUDA ON CACHE BOOL "build gcc for CUDA" FORCE)
     endif()
   endif()
 
   #cmake
   if(CMAKE_VERSION VERSION_LESS_EQUAL CMAKE_TARGET_VERSION)
-    set(BUILD_CMAKE ON)
+    set(BUILD_CMAKE ON CACHE BOOL "build CMAKE ${CMAKE_VERSION}" FORCE)
   endif()
 
   #OpenMPI
@@ -96,22 +96,24 @@ elseif(${BUILD_MINIMAL_DEPENDENCIES} MATCHES "ON")
     if(${MPI_FOUND})
       message(STATUS "Using system MPI ${MPI_VERSION}")
     else()
-      set(BUILD_OPENMPI ON)
+      set(BUILD_OPENMPI ON CACHE BOOL "build OpenMPI ${OPENMPI_VERSION}" FORCE)
       endif()
   endif()
 
   # boost
-  find_package(Boost ${BOOST_TARGET_VERSION} COMPONENTS system context thread chrono)
-  if(${Boost_FOUND})
-    message(STATUS "Using sysem Boost ${Boost_VERSION}")
-    set(BOOST_ROOT ${Boost_ROOT})
-    if(DEFINED Boost_DIR)
-      get_filename_component(
-      BOOST_ROOT "${Boost_DIR}/../../../" ABSOLUTE
-      )
-   endif()
-   else()
-    set(BUILD_BOOST ON)
+  if(${BUILD_BOOST} MATCHES "OFF")
+    find_package(Boost ${BOOST_TARGET_VERSION} COMPONENTS system context thread chrono)
+    if(${Boost_FOUND})
+      message(STATUS "Using sysem Boost ${Boost_VERSION}")
+      set(BOOST_ROOT ${Boost_ROOT} CACHE PATH  "BOOST_ROOT" FORCE)
+      if(DEFINED Boost_DIR)
+        get_filename_component(
+        BOOST_ROOT "${Boost_DIR}/../../../" ABSOLUTE CACHE PATH "BOOST_ROOT"
+        )
+    endif()
+    else()
+      set(BUILD_BOOST ON CACHE BOOL "build Boost ${BOOST_VERSION}" FORCE)
+    endif()
    endif()
 
   # HDF5 #TODO: HDF5 got found but missing lib dir
@@ -120,7 +122,7 @@ elseif(${BUILD_MINIMAL_DEPENDENCIES} MATCHES "ON")
   # if(${HDF5_FOUND})
   #   message(STATUS "Using sysem HDF5 ${HDF5_VERSION}")
   # else()
-    set(BUILD_HDF5 ON)
+    set(BUILD_HDF5 ON CACHE BOOL "build HDF5 ${HDF5_VERSION}" FORCE)
   # endif()
 
   # HPX
@@ -128,24 +130,23 @@ elseif(${BUILD_MINIMAL_DEPENDENCIES} MATCHES "ON")
   # if(${HPX_FOUND})
   #   message(STATUS "Using sysem HPX ${HDF5_VERSION}")
   # else()
-    set(BUILD_HPX ON)
+    set(BUILD_HPX ON CACHE BOOL "build HPX ${HPX_VERSION}" FORCE)
   # endif()
 
 
   #TODO determine build for REST
-  set(BUILD_SILO ON)
-  set(BUILD_HWLOC ON)
-  set(BUILD_JEMALLOC ON)
-  # set(BUILD_TCMALLOC ON)
-  set(BUILD_HPX ON)
-  set(BUILD_VC ON)
+  set(BUILD_SILO ON CACHE BOOL "build Silo ${SILO_VERSION}" FORCE)
+  set(BUILD_HWLOC ON CACHE BOOL "build Hwloc ${HWLOC_VERSION}" FORCE)
+  set(BUILD_JEMALLOC ON CACHE BOOL "build jemalloc ${JEMALLOC_VERSION}" FORCE)
+  set(BUILD_HPX ON CACHE BOOL "build HPX ${HPX_VERSION}" FORCE)
+  set(BUILD_VC ON CACHE BOOL "build Vc ${VC_VERSION}" FORCE)
 
 
   if(OCT_WITH_PAPI MATCHES "ON")
-    set(BUILD_PAPI ON)
+    set(BUILD_PAPI ON CACHE BOOL "build PAPI ${PAPI_VERSION}" FORCE)
   endif()
   if(OCT_WITH_LIBFABRIC MATCHES "ON")
-    set(BUILD_LIBFABRIC ON)
+    set(BUILD_LIBFABRIC ON CACHE BOOL "build libfabric ${LIBFABRIC_VERSION}" FORCE)
   endif()
 elseif( NOT ${BUILD_SELECTED_DEPENDENCIES} MATCHES "ON")
   message(FATAL_ERROR "One build option must be set")
@@ -153,8 +154,8 @@ endif()
 
 
 
-set(CXXFLAGS "-fPIC -march=native -mtune=native -ffast-math -std=c++17")
-set(LIBHPX lib64)
+set(CXXFLAGS "-fPIC -march=native -mtune=native -ffast-math -std=c++17" CACHE  STRING "CXXFLAGS")
+set(LIBHPX lib64 CACHE STRING "LIBHPX")
 
 ########### build dependencies ##################
 include(ExternalProject)

@@ -1,4 +1,4 @@
-set(LDFLAGS "-lz -L${INSTALL_ROOT}/hdf5/lib -lhdf5 -no-pie")
+set(LDFLAGS "-lz -L${INSTALL_ROOT}/hdf5/lib -lhdf5 -no-pie" CACHE STRING "LDFLAGS" FORCE)
 
 ExternalProject_Add(
     Octotiger
@@ -22,7 +22,7 @@ ExternalProject_Add(
         -DHDF5_INCLUDE_DIR=${INSTALL_ROOT}/hdf5/include 
         -DHDF5_LIBRARY=${INSTALL_ROOT}/hdf5/lib/libhdf5.a
         -DHDF5_ROOT=${INSTALL_ROOT}/hdf5/
-        -DCMAKE_CXX_FLAGS=${CXXFLAGS}\ -fpermissive 
+        # -DCMAKE_CXX_FLAGS=${CXXFLAGS}\ -fpermissive 
         -DCMAKE_EXE_LINKER_FLAGS=${LDCXXFLAGS}\ -lz\ -L${INSTALL_ROOT}/hdf5/lib\ -lhdf5 
         -DOCTOTIGER_WITH_CUDA=${OCT_WITH_CUDA} 
     BUILD_IN_SOURCE 0

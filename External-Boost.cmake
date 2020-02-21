@@ -32,9 +32,8 @@ set_property( TARGET Boost PROPERTY FOLDER "Externals")
 
 ExternalProject_Get_Property( Boost source_dir )
 ExternalProject_Get_Property( Boost binary_dir )
-set( BOOST_ROOT ${source_dir})
-set( Boost_INCLUDE_DIR ${BOOST_ROOT}/include )
-set( Boost_INCLUDE_DIR ${BOOST_ROOT}/lib )
+set( BOOST_ROOT ${source_dir} CACHE PATH "BOOST_ROOT" FORCE)
+set( Boost_INCLUDE_DIR ${BOOST_ROOT}/include CACHE PATH "Boost include dir" FORCE)
 
 SET(CMAKE_INCLUDE_PATH ${CMAKE_INCLUDE_PATH} ${source_dir})
 SET(CMAKE_LIBRARY_PATH ${CMAKE_LIBRARY_PATH} ${BOOST_ROOT}/lib )

@@ -8,11 +8,37 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Cache
+      uses: actions/cache@v1.1.2
+      id: boost
+      with:
+        # A directory to store and save the cache
+        path: boost_dir
+        # An explicit key for restoring and saving the cache
+        key: boost
+        # An ordered list of keys to use for restoring the cache if no cache hit occurred for key
+        #restore-keys: key_save_dir
+
+    - name: Cache Boost
+      if: steps.boost.outputs.cache-hit != 'true'
+      run: |
+        echo installing Boost 1.72.0!
+        mkdir boost_dir
+        wget https://dl.bintray.com/boostorg/release/1.72.0/source/boost_1_72_0.tar.gz
+        ls
+        tar -zxf boost_1_72_0.tar.gz
+        cd boost_1_72_0
+        ./bootstrap.sh --prefix=boost_dir --with-toolset=gcc
+        ./b2 -j4 --with-atomic --with-filesystem --with-program_options --with-regex --with-system --with-chrono --with-date_time --with-thread
+        ./b2 install
+          
     - uses: actions/checkout@v2
     - name: Install gfortran
       run: sudo apt-get install gfortran
     - name: configure
       run: mkdir build && cd build && cmake -DCMAKE_CXX_FLAGS="-Werror" ..
+      env:
+        BOOST_ROOT: ~/boost_dir
     - name: build
       run: cmake --build build
 

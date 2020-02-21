@@ -20,7 +20,6 @@ option(OCT_WITH_APEX "Build octotiger with APEX support" OFF)
 set(CUDA_SM "sm_61")
 
 ##### Build options #########
-set(PARALLEL_BUILD 80) # TODO: get num cores
 set(INSTALL_ROOT ${CMAKE_CURRENT_BINARY_DIR}/build )
 
 

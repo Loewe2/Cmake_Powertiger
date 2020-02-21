@@ -8,6 +8,15 @@ set(OCTOTIGER_DEPENDENCIES)
 set(HPX_DEPENDENSIES)  
 set(SILO_DEPENDENSIES) 
 
+include(ProcessorCount)
+ProcessorCount(N)
+if(NOT N EQUAL 0)
+  set(PARALLEL_BUILD ${N})
+else()
+  set(PARALLEL_BUILD 1)
+  message(WARNING "Couldn't determine num cores set PARALLEL_BUILD manual for parallel making")
+endif()
+
 ######## select all dependencies to build ###########
 if(${BUILD_ALL_DEPENDENCIES} MATCHES "ON")
   set(BUILD_CMAKE ON)

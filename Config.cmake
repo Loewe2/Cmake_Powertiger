@@ -7,7 +7,7 @@ if( NOT CMAKE_BUILD_TYPE )
   set( CMAKE_BUILD_TYPE RelWithDebInfo CACHE STRING  "Choose the type of build octotiger, options are: None Debug Release RelWithDebInfo." FORCE )
 endif()
 
-option(OCT_WITH_CUDA "Build octotiger with CUDA support" OFF)
+option(OCT_WITH_CUDA "Build octotiger with CUDA support" ON)
 
 #TODO sinvoll OMPI optionen !!!!!!
 option(OCT_WITH_PARCEL "Parcelport" OFF)
@@ -26,6 +26,11 @@ set(INSTALL_ROOT ${CMAKE_CURRENT_BINARY_DIR}/build )
 cmake_dependent_option(BUILD_MINIMAL_DEPENDENCIES "Look for preinstalled software build only needed dependencies" ON "NOT BUILD_ALL_DEPENDENCIES;NOT  BUILD_SELECTED_DEPENDENCIES" OFF)
 cmake_dependent_option(BUILD_ALL_DEPENDENCIES "Don't look for preinstalled software build all dependencies" ON "NOT BUILD_MINIMAL_DEPENDENCIES;NOT BUILD_SELECTED_DEPENDENCIES" OFF)
 cmake_dependent_option(BUILD_SELECTED_DEPENDENCIES "Build only selected dependencies" ON "NOT BUILD_ALL_DEPENDENCIES; NOT BUILD_MINIMAL_DEPENDENCIES" OFF)
+
+set(CMAKE_CXX_STANDARD 17 CACHE STRING "CXX standard")
+set(CMAKE_CUDA_STANDARD 17 CACHE STRING "CUDA standard")
+
+set(CMAKE_CXX_FLAGS "-fPIC -march=native -mtune=native -ffast-math ${CMAKE_CXX_FLAGS}" CACHE  STRING "CXXFLAGS")
 
 
 ###### Dependency versions to build if needed ##### 

@@ -153,8 +153,6 @@ elseif( NOT ${BUILD_SELECTED_DEPENDENCIES} MATCHES "ON")
 endif()
 
 
-
-set(CXXFLAGS "-fPIC -march=native -mtune=native -ffast-math -std=c++17" CACHE  STRING "CXXFLAGS")
 set(LIBHPX lib64 CACHE STRING "LIBHPX")
 
 ########### build dependencies ##################

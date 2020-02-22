@@ -37,7 +37,7 @@ jobs:
     - name: Install gfortran
       run: sudo apt-get install gfortran
     - name: configure
-      run: mkdir build && cd build && cmake -DCMAKE_CXX_FLAGS="-Werror"  -DOCT_WITH_CUDA=OFF -DBOOST_ROOT=${{ github.workspace }}E/boost_dir -DBOOST_INCLUDE_DIR=${{ github.workspace }}/boost_dir/include ..
+      run: mkdir build && cd build && cmake -DCMAKE_CXX_FLAGS="-Werror"  -DOCT_WITH_CUDA=OFF -DBOOST_ROOT=${{ github.workspace }}/boost_dir -DBOOST_INCLUDE_DIR=${{ github.workspace }}/boost_dir/include ..
       env:
         BOOST_ROOT: ${{ github.workspace }}/boost_dir
     - name: build

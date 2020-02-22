@@ -7,7 +7,7 @@ if( NOT CMAKE_BUILD_TYPE )
   set( CMAKE_BUILD_TYPE RelWithDebInfo CACHE STRING  "Choose the type of build octotiger, options are: None Debug Release RelWithDebInfo." FORCE )
 endif()
 
-option(OCT_WITH_CUDA "Build octotiger with CUDA support" ON)
+option(OCT_WITH_CUDA "Build octotiger with CUDA support" OFF)
 
 #TODO sinvoll OMPI optionen !!!!!!
 option(OCT_WITH_PARCEL "Parcelport" OFF)

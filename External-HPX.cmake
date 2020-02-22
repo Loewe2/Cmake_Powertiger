@@ -31,6 +31,7 @@ ExternalProject_Add(
             -DLIBFABRIC_ROOT=${INSTALL_ROOT}/libfabric 
             -DBoost_NO_SYSTEM_PATHS=ON
             -DBOOST_ROOT=${BOOST_ROOT}
+            -DBoost_INCLUDE_DIR=${Boost_INCLUDE_DIRS}
             -DHPX_WITH_CUDA_ARCH=${CUDA_SM} 
             -DHPX_WITH_NETWORKING=ON 
             -DHPX_WITH_MORE_THAN_64_THREADS=ON 

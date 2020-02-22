@@ -27,6 +27,9 @@ ExternalProject_Add(
         -DHDF5_INCLUDE_DIR=${INSTALL_ROOT}/hdf5/include 
         -DHDF5_LIBRARY=${INSTALL_ROOT}/hdf5/lib/libhdf5.a
         -DHDF5_ROOT=${INSTALL_ROOT}/hdf5/
+        -DBoost_NO_SYSTEM_PATHS=ON
+        -DBOOST_ROOT=${BOOST_ROOT}
+        -DBoost_INCLUDE_DIR=${Boost_INCLUDE_DIRS}
         # -DCMAKE_CXX_FLAGS=${CXXFLAGS}\ -fpermissive 
         -DCMAKE_EXE_LINKER_FLAGS=${LDCXXFLAGS}\ -lz\ -L${INSTALL_ROOT}/hdf5/lib\ -lhdf5 
         -DOCTOTIGER_WITH_CUDA=${OCT_WITH_CUDA} 

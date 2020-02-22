@@ -35,9 +35,12 @@ jobs:
         ./b2 install
           
     - name: echo boost directory
-      run: ls ${{ github.workspace }}/boost_dir
+      run: ls ${{ github.workspace }}
     - name: echo boost_root
       run: echo $BOOST_ROOT
+      env:
+        BOOST_ROOT: ${{ github.workspace }}/boost_dir
+      
     - name: Install gfortran
       run: sudo apt-get install gfortran
     - name: configure

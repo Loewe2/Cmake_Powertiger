@@ -8,6 +8,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - uses: actions/checkout@v2
     - name: Cache
       uses: actions/cache@v1.1.2
       id: boost
@@ -33,7 +34,6 @@ jobs:
         ./b2 -j4 --with-atomic --with-filesystem --with-program_options --with-regex --with-system --with-chrono --with-date_time --with-thread
         ./b2 install
           
-    - uses: actions/checkout@v2
     - name: Install gfortran
       run: sudo apt-get install gfortran
     - name: configure

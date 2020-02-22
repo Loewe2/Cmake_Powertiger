@@ -14,7 +14,7 @@ jobs:
       id: boost
       with:
         # A directory to store and save the cache
-        path: boost_dir
+        path: ${{ github.workspace }}/boost_dir
         # An explicit key for restoring and saving the cache
         key: boost
         # An ordered list of keys to use for restoring the cache if no cache hit occurred for key
@@ -24,22 +24,22 @@ jobs:
       if: steps.boost.outputs.cache-hit != 'true'
       run: |
         echo installing Boost 1.72.0!
-        mkdir $HOME/boost_dir
+        mkdir ${{ github.workspace }}/boost_dir
         ls
         wget https://dl.bintray.com/boostorg/release/1.72.0/source/boost_1_72_0.tar.gz
         ls
         tar -zxf boost_1_72_0.tar.gz
         cd boost_1_72_0
-        ./bootstrap.sh --prefix=$HOME/boost_dir --with-toolset=gcc
+        ./bootstrap.sh --prefix=${{ github.workspace }}/boost_dir --with-toolset=gcc
         ./b2 -j4 --with-atomic --with-filesystem --with-program_options --with-regex --with-system --with-chrono --with-date_time --with-thread
         ./b2 install
           
     - name: Install gfortran
       run: sudo apt-get install gfortran
     - name: configure
-      run: mkdir build && cd build && cmake -DCMAKE_CXX_FLAGS="-Werror"  -DOCT_WITH_CUDA=OFF -DBOOST_ROOT=$HOME/boost_dir -DBOOST_INCLUDE_DIR=$HOME/boost_dir/include ..
+      run: mkdir build && cd build && cmake -DCMAKE_CXX_FLAGS="-Werror"  -DOCT_WITH_CUDA=OFF -DBOOST_ROOT=${{ github.workspace }}E/boost_dir -DBOOST_INCLUDE_DIR=${{ github.workspace }}/boost_dir/include ..
       env:
-        BOOST_ROOT: $HOME/boost_dir
+        BOOST_ROOT: ${{ github.workspace }}/boost_dir
     - name: build
       run: cmake --build build
 

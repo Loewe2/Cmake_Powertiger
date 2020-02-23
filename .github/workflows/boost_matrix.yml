@@ -6,47 +6,44 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        boost: [1_72_0, 1_71_0, 1_70_0, 1_69_0, 1_68_0, 1_67_0]
 
     steps:
     - uses: actions/checkout@v2
     - name: Cache
       uses: actions/cache@v1.1.2
-      id: boost_1_68_0
+      id: check-cache
       with:
         # A directory to store and save the cache
-        path: ${{ github.workspace }}/boost_dir
+        path: boost_dir 
         # An explicit key for restoring and saving the cache
-        key: boost_1_68_0
-        # An ordered list of keys to use for restoring the cache if no cache hit occurred for key
-        #restore-keys: key_save_dir
-
-    - name: Cache Boost
-      if: steps.boost.outputs.cache-hit != 'true'
+        key: boost-${{ matrix.boost }}
+    
+    - name: Build Boost ${{ matrix.boost }}
+      if: steps.check-cache.outputs.cache-hit != 'true'
       run: |
-        echo installing Boost 1.68.0!
-        mkdir ${{ github.workspace }}/boost_dir
-        ls
-        wget https://dl.bintray.com/boostorg/release/1.68.0/source/boost_1_68_0.tar.gz
-        ls
-        tar -zxf boost_1_68_0.tar.gz
-        cd boost_1_68_0
-        ./bootstrap.sh --prefix=${{ github.workspace }}/boost_dir --with-toolset=gcc
+        echo installing Boost ${{ matrix.boost }}
+        rm -rf boost_dir
+        mkdir boost_dir
+        cd boost_dir
+        wget  https://dl.bintray.com/boostorg/release/$(tr '_' '.' <<<"${{ matrix.boost }}")/source/boost_${{ matrix.boost }}.tar.gz
+        tar -zxf boost_${{ matrix.boost }}.tar.gz
+        cd boost_${{ matrix.boost }}
+        ./bootstrap.sh --prefix=boost_dir --with-toolset=gcc
         ./b2 -j4 --with-atomic --with-filesystem --with-program_options --with-regex --with-system --with-chrono --with-date_time --with-thread
         ./b2 install
           
-    - name: echo boost directory
-      run: ls ${{ github.workspace }}/boost_dir
-    - name: echo boost_root
-      run: echo $BOOST_ROOT
-      env:
-        BOOST_ROOT: ${{ github.workspace }}/boost_dir
       
     - name: Install gfortran
       run: sudo apt-get install gfortran
+      
     - name: configure
       run: mkdir build && cd build && cmake -DCMAKE_CXX_FLAGS="-Werror"  -DOCT_WITH_CUDA=OFF -DBOOST_ROOT=${{ github.workspace }}/boost_dir -DBoost_INCLUDE_DIR=${{ github.workspace }}/boost_dir/include ..
       env:
         BOOST_ROOT: ${{ github.workspace }}/boost_dir
+      
     - name: build
       run: cmake --build build
 

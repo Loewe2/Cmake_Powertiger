@@ -105,12 +105,9 @@ elseif(${BUILD_MINIMAL_DEPENDENCIES} MATCHES "ON")
     find_package(Boost ${BOOST_TARGET_VERSION} COMPONENTS system context thread chrono)
     if(${Boost_FOUND})
       message(STATUS "Using sysem Boost ${Boost_VERSION}")
-      set(BOOST_ROOT ${Boost_ROOT} CACHE PATH  "BOOST_ROOT" FORCE)
-      if(DEFINED Boost_DIR)
-        get_filename_component(
-        BOOST_ROOT "${Boost_DIR}/../../../" ABSOLUTE CACHE PATH "BOOST_ROOT"
+      get_filename_component(
+        BOOST_ROOT "${Boost_INCLUDE_DIRS}/../" ABSOLUTE CACHE PATH "BOOST_ROOT"
         )
-    endif()
     else()
       set(BUILD_BOOST ON CACHE BOOL "build Boost ${BOOST_VERSION}" FORCE)
     endif()

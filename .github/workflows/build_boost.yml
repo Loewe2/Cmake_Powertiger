@@ -1,0 +1,19 @@
+name: build Boost
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2      
+    - name: Install gfortran
+      run: sudo apt-get install gfortran
+    - name: configure
+      run: mkdir build && cd build && cmake -DCMAKE_CXX_FLAGS="-Werror"  -DOCT_WITH_CUDA=OFF ..
+    - name: build
+      run: cmake --build build
+
+

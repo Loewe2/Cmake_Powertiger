@@ -7,6 +7,7 @@ jobs:
 
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         boost: [1_72_0, 1_71_0, 1_70_0, 1_69_0, 1_68_0, 1_67_0]
 
@@ -22,7 +23,7 @@ jobs:
         key: boost-${{ matrix.boost }}
     
     - name: Build Boost ${{ matrix.boost }}
-      #if: steps.check-cache.outputs.cache-hit != 'true'
+      if: steps.check-cache.outputs.cache-hit != 'true'
       run: |
         echo installing Boost ${{ matrix.boost }}
         rm -rf boost_dir

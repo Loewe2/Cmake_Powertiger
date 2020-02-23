@@ -11,22 +11,22 @@ jobs:
     - uses: actions/checkout@v2
     - name: Cache
       uses: actions/cache@v1.1.2
-      id: boost2
+      id: boost_1_68_0
       with:
         # A directory to store and save the cache
         path: ${{ github.workspace }}/boost_dir
         # An explicit key for restoring and saving the cache
-        key: boost2
+        key: boost_1_68_0
         # An ordered list of keys to use for restoring the cache if no cache hit occurred for key
         #restore-keys: key_save_dir
 
     - name: Cache Boost
       if: steps.boost.outputs.cache-hit != 'true'
       run: |
-        echo installing Boost 1.72.0!
+        echo installing Boost 1.68.0!
         mkdir ${{ github.workspace }}/boost_dir
         ls
-        wget https://dl.bintray.com/boostorg/release/1.72.0/source/boost_1_72_0.tar.gz
+        wget https://dl.bintray.com/boostorg/release/1.68.0/source/boost_1_68_0.tar.gz
         ls
         tar -zxf boost_1_72_0.tar.gz
         cd boost_1_72_0

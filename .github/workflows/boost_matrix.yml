@@ -30,7 +30,7 @@ jobs:
         wget  https://dl.bintray.com/boostorg/release/$(tr '_' '.' <<<"${{ matrix.boost }}")/source/boost_${{ matrix.boost }}.tar.gz
         tar -zxf boost_${{ matrix.boost }}.tar.gz
         cd boost_${{ matrix.boost }}
-        ./bootstrap.sh --prefix=boost_dir --with-toolset=gcc
+        ./bootstrap.sh --prefix=${{ github.workspace }}/boost_dir --with-toolset=gcc
         ./b2 -j4 --with-atomic --with-filesystem --with-program_options --with-regex --with-system --with-chrono --with-date_time --with-thread
         ./b2 install -j4
           

@@ -28,8 +28,8 @@ jobs:
         ls
         wget https://dl.bintray.com/boostorg/release/1.68.0/source/boost_1_68_0.tar.gz
         ls
-        tar -zxf boost_1_72_0.tar.gz
-        cd boost_1_72_0
+        tar -zxf boost_1_68_0.tar.gz
+        cd boost_1_68_0
         ./bootstrap.sh --prefix=${{ github.workspace }}/boost_dir --with-toolset=gcc
         ./b2 -j4 --with-atomic --with-filesystem --with-program_options --with-regex --with-system --with-chrono --with-date_time --with-thread
         ./b2 install

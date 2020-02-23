@@ -21,5 +21,3 @@ ExternalProject_Add(
         # UPDATE "" #TODO: better solution
         DEPENDS ${SILO_DEPENDENCIES}
 )
-
-set($ENV{LD_LIBRARY_PATH} /import/sgs.local/scratch/vancraar/octo/cmake_test/supberbuild/build/build/silo/lib/:$ENV{LD_LIBRARY_PATH})

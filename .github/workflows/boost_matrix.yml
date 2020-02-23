@@ -1,4 +1,4 @@
-name: Cached Boost
+name: Boost Matrix
 
 on: [push]
 

@@ -20,6 +20,13 @@ ExternalProject_Add(
             -DCMAKE_BUILD_TYPE=Release 
             -DCMAKE_CXX_FLAGS=-fPIC
             -DCMAKE_C_FLAGS=-fPIC
+            # --enable-shared
+            # --enable-cxx
+            # --enable-parallel
+            -DBUILD_SHARED_LIBS:BOOL=ON
+            -DHDF5_BUILD_CPP_LIB:BOOL=ON
+            # -DHDF5_ENABLE_PARALLEL:BOOL=ON
+            -DMPIEXEC_MAX_NUMPROCS:STRING="${PARALLEL_BUILD}"
         BUILD_IN_SOURCE 0
         BUILD_ALWAYS OFF
 )

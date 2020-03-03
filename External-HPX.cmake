@@ -28,10 +28,10 @@ ExternalProject_Add(
             -DHWLOC_ROOT=${INSTALL_ROOT}/hwloc/ 
             -DHPX_WITH_MALLOC=JEMALLOC 
             -DJEMALLOC_ROOT=${INSTALL_ROOT}/jemalloc/  
-            -DLIBFABRIC_ROOT=${INSTALL_ROOT}/libfabric 
+            -DLIBFABRIC_ROOT=${INSTALL_ROOT}/libfabric
+            -DHPX_WITH_CUDA_ARCH=${CUDA_SM}  
             -DBoost_NO_SYSTEM_PATHS=ON
             -DBOOST_ROOT=${BOOST_ROOT}
-            -DHPX_WITH_CUDA_ARCH=${CUDA_SM} 
             -DHPX_WITH_NETWORKING=ON 
             -DHPX_WITH_MORE_THAN_64_THREADS=ON 
             -DHPX_WITH_MAX_CPU_COUNT=256 
@@ -57,6 +57,9 @@ ExternalProject_Add(
             -DHPX_WITH_APEX_NO_UPDATE=FALSE 
             -DHPX_WITH_APEX_TAG=develop 
             -DCMAKE_CXX_FLAGS=${CMAKE_CXX_FLAGS}
+            # -DCMAKE_CUDA_FLAGS=${CMAKE_CUDA_FLAGS}\ -fPIC
+
+
         BUILD_IN_SOURCE 0
         BUILD_ALWAYS OFF
         DEPENDS ${HPX_DEPENDENSIES}

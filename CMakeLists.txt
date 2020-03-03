@@ -123,12 +123,12 @@ elseif(${BUILD_MINIMAL_DEPENDENCIES} MATCHES "ON")
   # endif()
 
   # HPX
-  # find_package(HPX ${HPX_TARGET_VERSION})
-  # if(${HPX_FOUND})
-  #   message(STATUS "Using sysem HPX ${HDF5_VERSION}")
-  # else()
+  find_package(HPX ${HPX_TARGET_VERSION})
+  if(${HPX_FOUND})
+    message(STATUS "Using sysem HPX ${HDF5_VERSION}")
+  else()
     set(BUILD_HPX ON CACHE BOOL "build HPX ${HPX_VERSION}" FORCE)
-  # endif()
+  endif()
 
 
   #TODO determine build for REST

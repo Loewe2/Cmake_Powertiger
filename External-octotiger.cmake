@@ -20,7 +20,8 @@ ExternalProject_Add(
         -DSilo_INCLUDE_DIR=${CMAKE_CURRENT_BINARY_DIR}/build/silo/include 
         -DSilo_LIBRARY=${CMAKE_CURRENT_BINARY_DIR}/build/silo/lib/libsiloh5.a 
         -DSilo_DIR=${CMAKE_CURRENT_BINARY_DIR}/build/silo 
-        -DCMAKE_CXX_FLAGS=-fpermissive -std=c++17 
+        -DCMAKE_CXX_FLAGS=-fpermissive -std=c++17 -fPIC
+        -DCMAKE_C_FLAGS=-fPIC
         -DCMAKE_LINKER_FLAGS= ${LDFLAGS} 
         -DVc_DIR=${INSTALL_ROOT}/Vc/lib/cmake/Vc 
         -DOCTOTIGER_WITH_BLAST_TEST=OFF 
@@ -31,7 +32,10 @@ ExternalProject_Add(
         -DBOOST_ROOT=${BOOST_ROOT}
         # -DCMAKE_CXX_FLAGS=${CXXFLAGS}\ -fpermissive 
         -DCMAKE_EXE_LINKER_FLAGS=${LDCXXFLAGS}\ -lz\ -L${INSTALL_ROOT}/hdf5/lib\ -lhdf5 
-        -DOCTOTIGER_WITH_CUDA=${OCT_WITH_CUDA} 
+        -DOCTOTIGER_WITH_CUDA=${OCT_WITH_CUDA}
+        # -DCMAKE_CUDA_FLAGS=${CMAKE_CUDA_FLAGS}\ -fPIC
+        -DCMAKE_CUDA_FLAGS=-arch=${CUDA_SM}\ -std=c++14\ -fPIC 
+        # -DCUDA_NVCC_FLAGS=-fPIC
     BUILD_IN_SOURCE 0
     # BUILD_ALWAYS ON
     DEPENDS ${OCTOTIGER_DEPENDENCIES}

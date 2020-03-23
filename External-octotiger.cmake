@@ -1,5 +1,7 @@
 set(LDFLAGS "-lz -L${INSTALL_ROOT}/hdf5/lib -lhdf5 -no-pie" CACHE STRING "LDFLAGS" FORCE)
 
+set(CMAKE_HOST_FLAGS "")
+
 ExternalProject_Add(
     Octotiger
     
@@ -16,23 +18,21 @@ ExternalProject_Add(
         -DCMAKE_CUDA_HOST_COMPILER=${CMAKE_CUDA_HOST_COMPILER}
         -DCMAKE_CXX_STANDARD=${CMAKE_CXX_STANDARD}
         -DCMAKE_CUDA_STANDARD=${CMAKE_CUDA_STANDARD}
-        -DHPX_DIR=${CMAKE_CURRENT_BINARY_DIR}/build/hpx/lib/cmake/HPX/  
-        -DSilo_INCLUDE_DIR=${CMAKE_CURRENT_BINARY_DIR}/build/silo/include 
-        -DSilo_LIBRARY=${CMAKE_CURRENT_BINARY_DIR}/build/silo/lib/libsiloh5.a 
+        -DHPX_DIR=${CMAKE_CURRENT_BINARY_DIR}/build/hpx/lib/cmake/HPX/ 
+        -DOCTOTIGER_WITH_SILO=ON 
         -DSilo_DIR=${CMAKE_CURRENT_BINARY_DIR}/build/silo 
         -DCMAKE_CXX_FLAGS=-fpermissive -std=c++17 
         -DCMAKE_LINKER_FLAGS= ${LDFLAGS} 
         -DVc_DIR=${INSTALL_ROOT}/Vc/lib/cmake/Vc 
         -DOCTOTIGER_WITH_BLAST_TEST=OFF 
-        -DHDF5_INCLUDE_DIR=${INSTALL_ROOT}/hdf5/include 
-        -DHDF5_LIBRARY=${INSTALL_ROOT}/hdf5/lib/libhdf5.a
         -DHDF5_ROOT=${INSTALL_ROOT}/hdf5/
         -DBoost_NO_SYSTEM_PATHS=ON
         -DBOOST_ROOT=${BOOST_ROOT}
-        # -DCMAKE_CXX_FLAGS=${CXXFLAGS}\ -fpermissive 
         -DCMAKE_EXE_LINKER_FLAGS=${LDCXXFLAGS}\ -lz\ -L${INSTALL_ROOT}/hdf5/lib\ -lhdf5 
-        -DOCTOTIGER_WITH_CUDA=${OCT_WITH_CUDA} 
-    BUILD_IN_SOURCE 0
+        -DOCTOTIGER_WITH_CUDA=${OCT_WITH_CUDA}
+        -DCUDA_NVCC_FLAGS=-Xcompiler=-fPIC
+        -DCMAKE_BUILD_TYPE=Release
+    BUILD_IN_SOURCE FALSE
     # BUILD_ALWAYS ON
     DEPENDS ${OCTOTIGER_DEPENDENCIES}
 )

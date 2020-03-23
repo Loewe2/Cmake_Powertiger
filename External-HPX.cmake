@@ -1,7 +1,5 @@
 message( STATUS "Building HPX version: " ${HPX_TARGET_VERSION} )
 
-
-
 ExternalProject_Add(
     HPX
         PREFIX ${CMAKE_CURRENT_BINARY_DIR}/external/hpx
@@ -57,6 +55,7 @@ ExternalProject_Add(
             -DHPX_WITH_APEX_NO_UPDATE=FALSE 
             -DHPX_WITH_APEX_TAG=develop 
             -DCMAKE_CXX_FLAGS=${CMAKE_CXX_FLAGS}
+            -DBUILD_SHARED_LIBS=ON
         BUILD_IN_SOURCE 0
         BUILD_ALWAYS OFF
         DEPENDS ${HPX_DEPENDENSIES}

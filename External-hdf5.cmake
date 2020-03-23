@@ -17,9 +17,8 @@ ExternalProject_Add(
             -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}
             -DCMAKE_C_COMPILER=${CMAKE_C_COMPILER} 
             -DBUILD_TESTING=OFF 
-            -DCMAKE_BUILD_TYPE=Release 
-            -DCMAKE_CXX_FLAGS=-fPIC
-            -DCMAKE_C_FLAGS=-fPIC
+            -DCMAKE_BUILD_TYPE=Release
+            -DBUILD_SHARED_LIBS:BOOL=ON
         BUILD_IN_SOURCE 0
         BUILD_ALWAYS OFF
 )

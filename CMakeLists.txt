@@ -103,11 +103,17 @@ elseif(${BUILD_MINIMAL_DEPENDENCIES} MATCHES "ON")
   # boost
   if(${BUILD_BOOST} MATCHES "OFF")
     find_package(Boost ${BOOST_TARGET_VERSION} COMPONENTS system context thread chrono)
-    if(${Boost_FOUND})
-      message(STATUS "Using sysem Boost ${Boost_VERSION}")
-      get_filename_component(
-        BOOST_ROOT "${Boost_INCLUDE_DIRS}/../" ABSOLUTE CACHE PATH "BOOST_ROOT"
-        )
+      if(${Boost_FOUND})
+        if(${Boost_VERSION_STRING} VERSION_GREATER_EQUAL 1.63 AND ${Boost_VERSION_STRING} VERSION_LESS_EQUAL 1.69)
+
+        message(STATUS "Using sysem Boost ${Boost_VERSION_STRING}")
+        get_filename_component(
+          BOOST_ROOT "${Boost_INCLUDE_DIRS}/../" ABSOLUTE CACHE PATH "BOOST_ROOT"
+          )
+      else()
+        message(WARNING "Boost ${Boost_VERSION} not supportet building own Boost!")
+        set(BUILD_BOOST ON CACHE BOOL "build Boost ${BOOST_VERSION}" FORCE)
+      endif()
     else()
       set(BUILD_BOOST ON CACHE BOOL "build Boost ${BOOST_VERSION}" FORCE)
     endif()
@@ -123,12 +129,17 @@ elseif(${BUILD_MINIMAL_DEPENDENCIES} MATCHES "ON")
   # endif()
 
   # HPX
-  # find_package(HPX ${HPX_TARGET_VERSION})
-  # if(${HPX_FOUND})
-  #   message(STATUS "Using sysem HPX ${HDF5_VERSION}")
-  # else()
-    set(BUILD_HPX ON CACHE BOOL "build HPX ${HPX_VERSION}" FORCE)
-  # endif()
+  find_package(HPX ${HPX_TARGET_VERSION})
+  if(${HPX_FOUND})
+    if(${HPX_VERSION} VERSION_GREATER_EQUAL 1.4.0 AND ${HPX_VERSION} VERSION_LESS_EQUAL 1.4.2 )
+      message(STATUS "Using sysem HPX ${HPX_VERSION}")
+    else()
+      message(WARNING "HPX ${HPX_VERSION} not supportet building own HPX!")
+      set(BUILD_HPX ON CACHE BOOL "build HPX ${HPX_VERSION}" FORCE)
+    endif()
+  else()
+    set(BUILD_HPX ON CACHE BOOL "build HPX ${HPX_VERSION}" FORCE) TODO: HPX_VERSION double use
+  endif()
 
 
   #TODO determine build for REST
@@ -199,11 +210,6 @@ if( ${BUILD_JEMALLOC} MATCHES "ON" )
   include( External-jemalloc.cmake )
   list(APPEND HPX_DEPENDENSIES jemalloc)
 endif()
-
-# # if( ${BUILD_TCMALLOC} MATCHES "ON" )
-  # include( External-tcmalloc.cmake )
-# #   list(APPEND HPX_DEPENDENSIES tcmalloc)
-# # endif()
 
 if( ${BUILD_VC} MATCHES "ON" )
   include( External-VC.cmake )

@@ -16,4 +16,5 @@ ExternalProject_Add(
             -DBUILD_TESTING=OFF 
         BUILD_IN_SOURCE 0
         BUILD_ALWAYS OFF
+        EXCLUDE_FROM_ALL ON
 )

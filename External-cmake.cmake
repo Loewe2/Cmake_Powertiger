@@ -8,6 +8,7 @@ ExternalProject_Add(
         DOWNLOAD_NO_PROGRESS TRUE
         BUILD_IN_SOURCE 1
         BUILD_ALWAYS OFF
+        EXCLUDE_FROM_ALL ON
         CONFIGURE_COMMAND ./bootstrap --parallel=${PARALLEL_BUILD} --prefix=${CMAKE_CURRENT_BINARY_DIR}/build/cmake -- -DCMAKE_BUILD_TYPE=Release
 )
 

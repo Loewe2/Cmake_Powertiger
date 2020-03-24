@@ -6,6 +6,7 @@ ExternalProject_Add(
         GIT_REPOSITORY https://github.com/STEllAR-GROUP/hpx.git
         GIT_TAG ${HPX_TARGET_VERSION}
         GIT_PROGRESS FALSE
+        EXCLUDE_FROM_ALL ON
         INSTALL_DIR ${CMAKE_CURRENT_BINARY_DIR}/build/hpx
         CMAKE_ARGS  
             -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR> 

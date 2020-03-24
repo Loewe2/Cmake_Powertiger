@@ -8,6 +8,7 @@ if(${BUILD_GCC} MATCHES "ON")
             DOWNLOAD_NO_PROGRESS TRUE
             BUILD_IN_SOURCE 0
             BUILD_ALWAYS OFF
+            EXCLUDE_FROM_ALL ON
             PATCH_COMMAND ./contrib/download_prerequisites
             CONFIGURE_COMMAND <SOURCE_DIR>/configure --prefix=<INSTALL_DIR> --enable-languages=c,c++,fortran --disable-multilib --disable-nls
     )
@@ -26,6 +27,7 @@ if(${BUILD_GCC_CUDA} MATCHES "ON" )
             DOWNLOAD_NO_PROGRESS TRUE
             BUILD_IN_SOURCE 0
             BUILD_ALWAYS OFF
+            EXCLUDE_FROM_ALL ON
             PATCH_COMMAND ./contrib/download_prerequisites
             CONFIGURE_COMMAND <SOURCE_DIR>/configure --prefix=<INSTALL_DIR> --enable-languages=c,c++,fortran --disable-multilib --disable-nls
     )

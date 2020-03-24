@@ -10,4 +10,5 @@ ExternalProject_Add(
         CONFIGURE_COMMAND ./configure --prefix=${INSTALL_ROOT}/jemalloc
         BUILD_IN_SOURCE 1
         BUILD_ALWAYS OFF
+        EXCLUDE_FROM_ALL ON
 )

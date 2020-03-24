@@ -15,6 +15,7 @@ ExternalProject_Add(
         INSTALL_DIR ${INSTALL_ROOT}/boost
         BUILD_IN_SOURCE 1
         BUILD_ALWAYS OFF
+        EXCLUDE_FROM_ALL ON
         CONFIGURE_COMMAND CXX=${CMAKE_CXX_COMPILER} CC=${CMAKE_CC_COMPILER} ./bootstrap.sh --prefix=<INSTALL_DIR> --with-toolset=gcc
         BUILD_COMMAND ./b2 
             -j${PARALLEL_BUILD} "${flag1}" ${flag2} 

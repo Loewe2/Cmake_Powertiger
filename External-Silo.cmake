@@ -17,6 +17,7 @@ ExternalProject_Add(
             -q
         BUILD_IN_SOURCE 1
         BUILD_ALWAYS OFF
+        EXCLUDE_FROM_ALL ON
         # UPDATE "" #TODO: better solution
         DEPENDS ${SILO_DEPENDENCIES}
 )

@@ -142,9 +142,15 @@ elseif(${BUILD_MINIMAL_DEPENDENCIES} MATCHES "ON")
   endif()
 
 
+  # Vc
+  find_package(Vc ${VC_TARGET_VERSION})
+  if(NOT ${Vc_FOUND})
+    set(BUILD_VC ON CACHE BOOL "build Vc ${VC_TARGET_VERSION}" FORCE)
+  endif()
+
+
   #TODO determine build for REST
   set(BUILD_SILO ON CACHE BOOL "build Silo ${SILO_VERSION}" FORCE)
-  set(BUILD_VC ON CACHE BOOL "build Vc ${VC_VERSION}" FORCE)
 
 
   if(OCT_WITH_PAPI MATCHES "ON")

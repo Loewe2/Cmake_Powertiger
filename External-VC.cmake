@@ -18,3 +18,5 @@ ExternalProject_Add(
         BUILD_ALWAYS OFF
         EXCLUDE_FROM_ALL ON
 )
+
+set(Vc_ROOT ${CMAKE_CURRENT_BINARY_DIR}/build/Vc)

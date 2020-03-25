@@ -21,7 +21,7 @@ ExternalProject_Add(
         -DHPX_DIR=${CMAKE_CURRENT_BINARY_DIR}/build/hpx/lib/cmake/HPX/ 
         -DSilo_DIR=${CMAKE_CURRENT_BINARY_DIR}/build/silo 
         -DCMAKE_CXX_FLAGS=-fpermissive -std=c++17 
-        -DVc_DIR=${INSTALL_ROOT}/Vc/lib/cmake/Vc 
+        -DVc_DIR=${Vc_ROOT}/lib/cmake/Vc 
         -DOCTOTIGER_WITH_BLAST_TEST=OFF 
         -DHDF5_ROOT=${INSTALL_ROOT}/hdf5/
         -DBoost_NO_SYSTEM_PATHS=ON
@@ -31,6 +31,5 @@ ExternalProject_Add(
         -DCUDA_NVCC_FLAGS=-Xcompiler=-fPIC
         -DCMAKE_BUILD_TYPE=Release
     BUILD_IN_SOURCE FALSE
-    # BUILD_ALWAYS ON
     DEPENDS ${OCTOTIGER_DEPENDENCIES}
 )

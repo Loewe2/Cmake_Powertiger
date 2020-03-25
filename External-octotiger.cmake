@@ -21,7 +21,7 @@ ExternalProject_Add(
         -DHPX_DIR=${CMAKE_CURRENT_BINARY_DIR}/build/hpx/lib/cmake/HPX/ 
         -DSilo_DIR=${SILO_ROOT}
         -DCMAKE_CXX_FLAGS=-fpermissive -std=c++17 
-        -DVc_DIR=${Vc_ROOT}/lib/cmake/Vc 
+        -DVc_DIR=${Vc_CMAKE_MODULES_DIR} 
         -DOCTOTIGER_WITH_BLAST_TEST=OFF 
         -DHDF5_ROOT=${INSTALL_ROOT}/hdf5/
         -DBoost_NO_SYSTEM_PATHS=ON

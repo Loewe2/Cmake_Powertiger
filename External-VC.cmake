@@ -19,4 +19,4 @@ ExternalProject_Add(
         EXCLUDE_FROM_ALL ON
 )
 
-set(Vc_ROOT ${CMAKE_CURRENT_BINARY_DIR}/build/Vc)
+set(Vc_CMAKE_MODULES_DIR ${CMAKE_CURRENT_BINARY_DIR}/build/Vc/lib/cmake/Vc )

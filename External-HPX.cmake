@@ -1,3 +1,19 @@
+# check for dependancies
+set(BUILD_HWLOC ON CACHE BOOL "build Hwloc ${HWLOC_VERSION}" FORCE)
+set(BUILD_JEMALLOC ON CACHE BOOL "build jemalloc ${JEMALLOC_VERSION}" FORCE) # TODO: TcMalloc
+
+# dependencies
+if( ${BUILD_HWLOC} MATCHES "ON" )
+  include( External-hwloc.cmake )
+  list(APPEND HPX_DEPENDENSIES hwloc)
+endif()
+
+if( ${BUILD_JEMALLOC} MATCHES "ON" )
+  include( External-jemalloc.cmake )
+  list(APPEND HPX_DEPENDENSIES jemalloc)
+endif()
+
+
 message( STATUS "Building HPX version: " ${HPX_TARGET_VERSION} )
 
 ExternalProject_Add(
@@ -25,7 +41,7 @@ ExternalProject_Add(
             -DHPX_WITH_THREAD_IDLE_RATES=ON 
             -DHPX_WITH_DISABLED_SIGNAL_EXCEPTION_HANDLERS=ON 
             -DHWLOC_ROOT=${INSTALL_ROOT}/hwloc/ 
-            -DHPX_WITH_MALLOC=JEMALLOC 
+            -DHPX_WITH_MALLOC=JEMALLOC  # TODO: TcMalloc
             -DJEMALLOC_ROOT=${INSTALL_ROOT}/jemalloc/  
             -DLIBFABRIC_ROOT=${INSTALL_ROOT}/libfabric 
             -DBoost_NO_SYSTEM_PATHS=ON

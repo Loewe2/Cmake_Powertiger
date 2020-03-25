@@ -144,8 +144,6 @@ elseif(${BUILD_MINIMAL_DEPENDENCIES} MATCHES "ON")
 
   #TODO determine build for REST
   set(BUILD_SILO ON CACHE BOOL "build Silo ${SILO_VERSION}" FORCE)
-  set(BUILD_HWLOC ON CACHE BOOL "build Hwloc ${HWLOC_VERSION}" FORCE)
-  set(BUILD_JEMALLOC ON CACHE BOOL "build jemalloc ${JEMALLOC_VERSION}" FORCE)
   set(BUILD_VC ON CACHE BOOL "build Vc ${VC_VERSION}" FORCE)
 
 
@@ -186,7 +184,6 @@ if( ${BUILD_OPENMPI} MATCHES "ON" )
 endif()
 
 
-
 if( ${BUILD_BOOST} MATCHES "ON" )
   include( External-Boost.cmake )
   list(APPEND OCTOTIGER_DEPENDENCIES Boost)
@@ -202,16 +199,6 @@ endif()
 if( ${BUILD_SILO} MATCHES "ON" )
   include( External-Silo.cmake )
   list(APPEND OCTOTIGER_DEPENDENCIES Silo)
-endif()
-
-if( ${BUILD_HWLOC} MATCHES "ON" )
-  include( External-hwloc.cmake )
-  list(APPEND HPX_DEPENDENSIES hwloc)
-endif()
-
-if( ${BUILD_JEMALLOC} MATCHES "ON" )
-  include( External-jemalloc.cmake )
-  list(APPEND HPX_DEPENDENSIES jemalloc)
 endif()
 
 if( ${BUILD_VC} MATCHES "ON" )

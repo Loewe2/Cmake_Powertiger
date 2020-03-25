@@ -149,10 +149,14 @@ elseif(${BUILD_MINIMAL_DEPENDENCIES} MATCHES "ON")
   endif()
 
 
+  #SILO
+  find_package(SILO ${SILO_TARGET_VERSION})
+  if(NOT ${SILO_FOUND})
+    set(BUILD_SILO ON CACHE BOOL "build Silo ${SILO_VERSION}" FORCE)
+  endif()
+  
+
   #TODO determine build for REST
-  set(BUILD_SILO ON CACHE BOOL "build Silo ${SILO_VERSION}" FORCE)
-
-
   if(OCT_WITH_PAPI MATCHES "ON")
     set(BUILD_PAPI ON CACHE BOOL "build PAPI ${PAPI_VERSION}" FORCE)
   endif()

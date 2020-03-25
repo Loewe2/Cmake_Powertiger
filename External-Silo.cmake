@@ -21,3 +21,5 @@ ExternalProject_Add(
         # UPDATE "" #TODO: better solution
         DEPENDS ${SILO_DEPENDENCIES}
 )
+
+set(SILO_ROOT ${CMAKE_CURRENT_BINARY_DIR}/build/silo)

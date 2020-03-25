@@ -19,7 +19,7 @@ ExternalProject_Add(
         -DCMAKE_CXX_STANDARD=${CMAKE_CXX_STANDARD}
         -DCMAKE_CUDA_STANDARD=${CMAKE_CUDA_STANDARD}
         -DHPX_DIR=${CMAKE_CURRENT_BINARY_DIR}/build/hpx/lib/cmake/HPX/ 
-        -DSilo_DIR=${CMAKE_CURRENT_BINARY_DIR}/build/silo 
+        -DSilo_DIR=${SILO_ROOT}
         -DCMAKE_CXX_FLAGS=-fpermissive -std=c++17 
         -DVc_DIR=${Vc_ROOT}/lib/cmake/Vc 
         -DOCTOTIGER_WITH_BLAST_TEST=OFF 

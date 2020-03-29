@@ -31,3 +31,4 @@ ExternalProject_Add(
 )
 
 set( BOOST_ROOT ${INSTALL_ROOT}/boost CACHE PATH "BOOST_ROOT" FORCE)
+set( Boost_LIBRARY_DIRS ${INSTALL_ROOT}/boost/lib )

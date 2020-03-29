@@ -27,6 +27,7 @@ ExternalProject_Add(
         -DBoost_NO_SYSTEM_PATHS=ON
         -DBOOST_ROOT=${BOOST_ROOT}
         -DCMAKE_EXE_LINKER_FLAGS=${LDCXXFLAGS}\ -lz\ -L${INSTALL_ROOT}/hdf5/lib\ -lhdf5 
+        -DCMAKE_INSTALL_RPATH:String=<INSTALL_DIR>/lib$<SEMICOLON>${INSTALL_ROOT}/hpx/lib$<SEMICOLON>${Boost_LIBRARY_DIRS}$<SEMICOLON>${INSTALL_ROOT}/jemalloc/lib$<SEMICOLON>${INSTALL_ROOT}/hdf5/lib
         -DOCTOTIGER_WITH_CUDA=${OCT_WITH_CUDA}
         -DCUDA_NVCC_FLAGS=-Xcompiler=-fPIC
         -DCMAKE_BUILD_TYPE=Release
